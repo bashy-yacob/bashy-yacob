@@ -1,6 +1,4 @@
-# 👋 שלום, אני באשי
-
-#<img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="50">  
+# 👋 שלום, אני באשי <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="50">  
 
 מפתחת בתחילת הדרך, שואפת לכתוב קוד נקי, יעיל ומדויק.  
 אוהבת ליצור פרויקטים מלאים, להבין לעומק טכנולוגיות — ולוודא שהכל עובד כמו שצריך.
