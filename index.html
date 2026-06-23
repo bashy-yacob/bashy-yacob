@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bashy Klein · Full Stack Developer</title>
+<meta name="description" content="Bashy Klein — Full Stack Developer (React, Node.js, NestJS, TypeScript, C#, .NET). בניית אתרים ומערכות web מודרניות." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0b1020; --bg2:#0f1730; --card:#141d36; --card2:#172242;
+    --text:#e8edf7; --muted:#9aa6c4; --line:rgba(255,255,255,.08);
+    --brand:#6c8cff; --brand2:#9b7bff; --accent:#39d3bb;
+    --shadow:0 18px 40px -20px rgba(0,0,0,.7);
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Heebo','Inter',system-ui,Arial,sans-serif;
+    background:radial-gradient(1200px 700px at 80% -10%,rgba(108,140,255,.18),transparent 60%),
+               radial-gradient(900px 600px at -10% 10%,rgba(155,123,255,.16),transparent 55%),
+               var(--bg);
+    color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  html[lang="en"]{font-family:'Inter','Heebo',system-ui,Arial,sans-serif}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  section{padding:84px 0;position:relative}
+  .eyebrow{color:var(--accent);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.78rem;margin-bottom:10px}
+  h2.title{font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:800;line-height:1.2;margin-bottom:10px}
+  .subtitle{color:var(--muted);max-width:560px;margin-bottom:34px}
+
+  /* NAV */
+  header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
+    background:rgba(11,16,32,.72);border-bottom:1px solid var(--line)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800}
+  .logo .dot{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;font-weight:800}
+  .menu{display:flex;gap:6px;align-items:center}
+  .menu a{padding:8px 12px;border-radius:10px;color:var(--muted);font-weight:500;font-size:.95rem;transition:.2s}
+  .menu a:hover{color:var(--text);background:rgba(255,255,255,.06)}
+  .lang{cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.04);
+    color:var(--text);padding:8px 14px;border-radius:999px;font-weight:700;font-size:.85rem;transition:.2s}
+  .lang:hover{border-color:var(--brand);color:#fff}
+  .burger{display:none;background:none;border:1px solid var(--line);color:var(--text);
+    width:42px;height:42px;border-radius:12px;font-size:1.2rem;cursor:pointer}
+
+  /* HERO */
+  .hero{padding-top:64px}
+  .hero .badge{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--line);
+    background:rgba(57,211,187,.08);color:var(--accent);padding:7px 14px;border-radius:999px;
+    font-size:.85rem;font-weight:600;margin-bottom:22px}
+  .hero h1{font-size:clamp(2.1rem,6vw,3.7rem);font-weight:800;line-height:1.08;letter-spacing:-.02em}
+  .hero h1 .grad{background:linear-gradient(120deg,var(--brand),var(--brand2),var(--accent));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.lead{color:var(--muted);font-size:clamp(1.02rem,2.2vw,1.25rem);max-width:620px;margin:18px 0 30px}
+  .cta{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:12px;
+    font-weight:700;font-size:.98rem;transition:.22s;border:1px solid transparent;cursor:pointer}
+  .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;
+    box-shadow:0 14px 30px -12px rgba(108,140,255,.7)}
+  .btn.primary:hover{transform:translateY(-2px)}
+  .btn.ghost{border-color:var(--line);background:rgba(255,255,255,.03);color:var(--text)}
+  .btn.ghost:hover{border-color:var(--brand);transform:translateY(-2px)}
+  .stats{display:flex;gap:34px;flex-wrap:wrap;margin-top:46px}
+  .stat .n{font-size:1.7rem;font-weight:800;color:#fff}
+  .stat .l{color:var(--muted);font-size:.9rem}
+
+  /* CARDS GRID */
+  .grid{display:grid;gap:20px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .card{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);
+    border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);transition:.25s;position:relative;overflow:hidden}
+  .card:hover{transform:translateY(-4px);border-color:rgba(108,140,255,.45)}
+  .card .ic{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-size:1.5rem;
+    background:rgba(108,140,255,.14);margin-bottom:16px}
+  .card h3{font-size:1.18rem;font-weight:700;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:.96rem}
+  .card ul{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:9px}
+  .card ul li{color:var(--muted);font-size:.93rem;display:flex;gap:9px;align-items:flex-start}
+  .card ul li::before{content:"✓";color:var(--accent);font-weight:800;flex:none}
+  .tag{display:inline-block;background:rgba(255,255,255,.06);border:1px solid var(--line);
+    color:var(--muted);padding:4px 11px;border-radius:999px;font-size:.82rem;margin:4px 4px 0 0;font-weight:500}
+
+  /* PROJECTS */
+  .proj .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .proj .stack{margin-top:10px}
+  .proj a.repo{display:inline-flex;align-items:center;gap:7px;margin-top:16px;color:var(--brand);font-weight:600;font-size:.92rem}
+
+  /* TIMELINE / EXPERIENCE */
+  .exp{border:1px solid var(--line);border-radius:var(--radius);padding:26px;
+    background:linear-gradient(180deg,var(--card),var(--card2));box-shadow:var(--shadow)}
+  .exp .role{font-weight:700;font-size:1.15rem}
+  .exp .meta{color:var(--accent);font-weight:600;font-size:.92rem;margin:4px 0 14px}
+  .exp ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .exp ul li{color:var(--muted);display:flex;gap:10px}
+  .exp ul li::before{content:"▹";color:var(--brand);flex:none}
+
+  /* SKILLS */
+  .skillcol h4{font-weight:700;margin-bottom:12px;color:#fff}
+
+  /* EDUCATION */
+  .edu li{color:var(--muted);margin-inline-start:18px;margin-bottom:6px}
+
+  /* CONTACT */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .contact-cards{display:flex;flex-direction:column;gap:14px}
+  .ccard{display:flex;align-items:center;gap:14px;border:1px solid var(--line);border-radius:14px;
+    padding:16px 18px;background:rgba(255,255,255,.03);transition:.2s}
+  .ccard:hover{border-color:var(--brand);transform:translateX(-4px)}
+  html[lang="en"] .ccard:hover{transform:translateX(4px)}
+  .ccard .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:1.2rem;
+    background:rgba(108,140,255,.14);flex:none}
+  .ccard .t{font-weight:700}
+  .ccard .v{color:var(--muted);font-size:.9rem;direction:ltr;text-align:start}
+  form .field{margin-bottom:14px}
+  form label{display:block;font-size:.88rem;color:var(--muted);margin-bottom:6px;font-weight:600}
+  form input,form textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);
+    color:var(--text);border-radius:12px;padding:12px 14px;font:inherit;transition:.2s}
+  form input:focus,form textarea:focus{outline:none;border-color:var(--brand);background:rgba(255,255,255,.07)}
+  form textarea{resize:vertical;min-height:110px}
+  .formmsg{margin-top:12px;font-weight:600;font-size:.92rem;display:none}
+  .hp{position:absolute;left:-9999px;opacity:0}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;color:var(--muted);font-size:.9rem}
+
+  .fade{opacity:0;transform:translateY(22px);transition:.7s ease}
+  .fade.in{opacity:1;transform:none}
+
+  @media(max-width:860px){
+    .g3{grid-template-columns:1fr}
+    .g2{grid-template-columns:1fr}
+    .contact-grid{grid-template-columns:1fr}
+    .menu{display:none}
+    .burger{display:grid;place-items:center}
+    .menu.open{display:flex;position:absolute;top:64px;inset-inline-start:0;inset-inline-end:0;
+      flex-direction:column;background:rgba(11,16,32,.97);padding:14px;border-bottom:1px solid var(--line)}
+    .menu.open a{padding:12px}
+    section{padding:60px 0}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#home" class="logo"><span class="dot">BK</span><span>Bashy Klein</span></a>
+    <nav class="menu" id="menu">
+      <a href="#services" data-t="nav.services">שירותים</a>
+      <a href="#projects" data-t="nav.projects">פרויקטים</a>
+      <a href="#about" data-t="nav.about">אודות</a>
+      <a href="#experience" data-t="nav.experience">ניסיון</a>
+      <a href="#skills" data-t="nav.skills">כישורים</a>
+      <a href="#contact" data-t="nav.contact">צור קשר</a>
+      <button class="lang" id="langBtn">EN</button>
+    </nav>
+    <button class="burger" id="burger" aria-label="menu">☰</button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="wrap">
+      <span class="badge">● <span data-t="hero.badge">זמינה לפרויקטים ולהזדמנויות</span></span>
+      <h1 data-t-html="hero.title">שלום, אני <span class="grad">Bashy Klein</span><br>Full Stack Developer</h1>
+      <p class="lead" data-t="hero.lead">בונה אתרים ומערכות web מודרניות, מהירות ונקיות — מהרעיון ועד העלייה לאוויר. עובדת בעיקר עם React בצד הלקוח ו-Node.js / NestJS בצד השרת.</p>
+      <div class="cta">
+        <a href="#contact" class="btn primary" data-t="hero.ctaContact">בואו נדבר →</a>
+        <a href="#projects" class="btn ghost" data-t="hero.ctaProjects">לפרויקטים שלי</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="n">Full&nbsp;Stack</div><div class="l" data-t="hero.s1">פרונט + בק</div></div>
+        <div class="stat"><div class="n">React · Node</div><div class="l" data-t="hero.s2">סטאק עיקרי</div></div>
+        <div class="stat"><div class="n">2025+</div><div class="l" data-t="hero.s3">ניסיון בפרודקשן</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="eyebrow" data-t="services.eyebrow">שירותים</div>
+      <h2 class="title" data-t="services.title">בניית אתרים שעובדים בשבילך</h2>
+      <p class="subtitle" data-t="services.subtitle">פתרונות web לעסקים — מאתר תדמית מהיר ועד חנות אונליין, כולל תחזוקה שוטפת.</p>
+      <div class="grid g3" id="servicesGrid"></div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="eyebrow" data-t="projects.eyebrow">תיק עבודות</div>
+      <h2 class="title" data-t="projects.title">פרויקטים נבחרים</h2>
+      <p class="subtitle" data-t="projects.subtitle">מערכות full-stack שבניתי מקצה לקצה.</p>
+      <div class="grid g2" id="projectsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="eyebrow" data-t="about.eyebrow">אודות</div>
+      <h2 class="title" data-t="about.title">קצת עליי</h2>
+      <div class="card"><p data-t="about.body">אני מפתחת Full Stack עם ניסיון מעשי בבנייה ותחזוקה של אפליקציות web ודסקטופ מודרניות. עובדת בעיקר עם React בצד הלקוח ו-Node.js / NestJS בצד השרת, עם דגש חזק על ארכיטקטורה נקייה, best practices וקוד תחזוקתי. בעלת ניסיון בעבודת צוות אמיתית — Git, Pull Requests ו-Code Reviews. אנליטית, לומדת מהר ומסתגלת לדרישות עסקיות משתנות.</p></div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="eyebrow" data-t="exp.eyebrow">ניסיון תעסוקתי</div>
+      <h2 class="title" data-t="exp.title">איפה עבדתי</h2>
+      <div class="exp">
+        <div class="role" data-t="exp.role">Full Stack Developer · Oz Software (Practicum)</div>
+        <div class="meta" data-t="exp.dates">2025 – היום</div>
+        <ul id="expList"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="eyebrow" data-t="skills.eyebrow">כישורים טכניים</div>
+      <h2 class="title" data-t="skills.title">הכלים שלי</h2>
+      <div class="grid g3" id="skillsGrid"></div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="wrap">
+      <div class="eyebrow" data-t="edu.eyebrow">השכלה</div>
+      <h2 class="title" data-t="edu.title">לימודים</h2>
+      <div class="grid g2" id="eduGrid"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="eyebrow" data-t="contact.eyebrow">יצירת קשר</div>
+      <h2 class="title" data-t="contact.title">בואו נבנה משהו ביחד</h2>
+      <p class="subtitle" data-t="contact.subtitle">מחפשים אתר חדש, או הזדמנות עבודה? אשמח לשמוע.</p>
+      <div class="contact-grid">
+        <div class="contact-cards">
+          <a class="ccard" href="mailto:bashy3309@gmail.com"><span class="ic">✉️</span><span><span class="t" data-t="contact.email">אימייל</span><br><span class="v">bashy3309@gmail.com</span></span></a>
+          <a class="ccard" href="tel:0548473309"><span class="ic">📞</span><span><span class="t" data-t="contact.phone">טלפון</span><br><span class="v">054-847-3309</span></span></a>
+          <a class="ccard" href="https://wa.me/972548473309" target="_blank" rel="noopener"><span class="ic">💬</span><span><span class="t">WhatsApp</span><br><span class="v">+972 54-847-3309</span></span></a>
+          <a class="ccard" href="https://github.com/bashy-yacob" target="_blank" rel="noopener"><span class="ic">🐙</span><span><span class="t">GitHub</span><br><span class="v">github.com/bashy-yacob</span></span></a>
+        </div>
+        <div class="card">
+          <form id="contactForm">
+            <input type="text" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+            <div class="field"><label data-t="form.name">שם מלא</label><input type="text" name="name" required /></div>
+            <div class="field"><label data-t="form.email">אימייל</label><input type="email" name="email" required /></div>
+            <div class="field"><label data-t="form.message">הודעה</label><textarea name="message" required></textarea></div>
+            <button type="submit" class="btn primary" style="width:100%;justify-content:center" data-t="form.send">שליחה</button>
+            <div class="formmsg" id="formMsg"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© <span id="year"></span> Bashy Klein · Full Stack Developer</div>
+    <div style="margin-top:6px;opacity:.7" data-t="footer.built">נבנה באהבה · React · Node.js · NestJS</div>
+  </div>
+</footer>
+
+<script>
+/* ====== CONFIG ======
+   כדי שהטופס ישלח מייל אוטומטית: היכנסי ל-web3forms.com, קבלי access key חינמי,
+   והדביקי אותו במקום הריק למטה. עד אז — הטופס פותח את תוכנת המייל עם ההודעה (mailto). */
+const WEB3FORMS_KEY = ""; // ← הדביקי כאן את המפתח שלך
+
+/* ====== CONTENT (he / en) ====== */
+const T = {
+  he:{
+    "nav.services":"שירותים","nav.projects":"פרויקטים","nav.about":"אודות","nav.experience":"ניסיון","nav.skills":"כישורים","nav.contact":"צור קשר",
+    "hero.badge":"זמינה לפרויקטים ולהזדמנויות",
+    "hero.title":'שלום, אני <span class="grad">Bashy Klein</span><br>Full Stack Developer',
+    "hero.lead":"בונה אתרים ומערכות web מודרניות, מהירות ונקיות — מהרעיון ועד העלייה לאוויר. עובדת בעיקר עם React בצד הלקוח ו-Node.js / NestJS בצד השרת.",
+    "hero.ctaContact":"בואו נדבר →","hero.ctaProjects":"לפרויקטים שלי",
+    "hero.s1":"פרונט + בק","hero.s2":"סטאק עיקרי","hero.s3":"ניסיון בפרודקשן",
+    "services.eyebrow":"שירותים","services.title":"בניית אתרים שעובדים בשבילך","services.subtitle":"פתרונות web לעסקים — מאתר תדמית מהיר ועד חנות אונליין, כולל תחזוקה שוטפת.",
+    "projects.eyebrow":"תיק עבודות","projects.title":"פרויקטים נבחרים","projects.subtitle":"מערכות full-stack שבניתי מקצה לקצה.",
+    "about.eyebrow":"אודות","about.title":"קצת עליי","about.body":"אני מפתחת Full Stack עם ניסיון מעשי בבנייה ותחזוקה של אפליקציות web ודסקטופ מודרניות. עובדת בעיקר עם React בצד הלקוח ו-Node.js / NestJS בצד השרת, עם דגש חזק על ארכיטקטורה נקייה, best practices וקוד תחזוקתי. בעלת ניסיון בעבודת צוות אמיתית — Git, Pull Requests ו-Code Reviews. אנליטית, לומדת מהר ומסתגלת לדרישות עסקיות משתנות.",
+    "exp.eyebrow":"ניסיון תעסוקתי","exp.title":"איפה עבדתי","exp.role":"Full Stack Developer · Oz Software (Practicum)","exp.dates":"2025 – היום",
+    "skills.eyebrow":"כישורים טכניים","skills.title":"הכלים שלי",
+    "edu.eyebrow":"השכלה","edu.title":"לימודים",
+    "contact.eyebrow":"יצירת קשר","contact.title":"בואו נבנה משהו ביחד","contact.subtitle":"מחפשים אתר חדש, או הזדמנות עבודה? אשמח לשמוע.","contact.email":"אימייל","contact.phone":"טלפון",
+    "form.name":"שם מלא","form.email":"אימייל","form.message":"הודעה","form.send":"שליחה",
+    "form.sending":"שולח…","form.ok":"תודה! ההודעה נשלחה, אחזור אלייך בהקדם.","form.err":"אופס, משהו השתבש. נסו שוב או שלחו מייל ישירות.",
+    "footer.built":"נבנה באהבה · React · Node.js · NestJS"
+  },
+  en:{
+    "nav.services":"Services","nav.projects":"Projects","nav.about":"About","nav.experience":"Experience","nav.skills":"Skills","nav.contact":"Contact",
+    "hero.badge":"Available for projects & opportunities",
+    "hero.title":'Hi, I\'m <span class="grad">Bashy Klein</span><br>Full Stack Developer',
+    "hero.lead":"I build modern, fast and clean web apps — from idea to launch. Mainly React on the frontend and Node.js / NestJS on the backend.",
+    "hero.ctaContact":"Let's talk →","hero.ctaProjects":"View my work",
+    "hero.s1":"Front + Back","hero.s2":"Core stack","hero.s3":"Production experience",
+    "services.eyebrow":"Services","services.title":"Websites that work for you","services.subtitle":"Web solutions for businesses — from a fast landing site to an online store, plus ongoing maintenance.",
+    "projects.eyebrow":"Portfolio","projects.title":"Selected projects","projects.subtitle":"Full-stack systems I built end to end.",
+    "about.eyebrow":"About","about.title":"A little about me","about.body":"I'm a Full Stack Developer with hands-on experience building and maintaining modern web and desktop applications. I work mainly with React on the frontend and Node.js / NestJS on the backend, with a strong emphasis on clean architecture, best practices and maintainable code. I have real team experience — Git, Pull Requests and Code Reviews. Analytical, a fast learner, and quick to adapt to changing business requirements.",
+    "exp.eyebrow":"Experience","exp.title":"Where I worked","exp.role":"Full Stack Developer · Oz Software (Practicum)","exp.dates":"2025 – Present",
+    "skills.eyebrow":"Technical skills","skills.title":"My toolbox",
+    "edu.eyebrow":"Education","edu.title":"Studies",
+    "contact.eyebrow":"Get in touch","contact.title":"Let's build something together","contact.subtitle":"Looking for a new website, or a job opportunity? I'd love to hear from you.","contact.email":"Email","contact.phone":"Phone",
+    "form.name":"Full name","form.email":"Email","form.message":"Message","form.send":"Send",
+    "form.sending":"Sending…","form.ok":"Thanks! Your message was sent, I'll get back to you soon.","form.err":"Oops, something went wrong. Try again or email me directly.",
+    "footer.built":"Built with love · React · Node.js · NestJS"
+  }
+};
+
+const SERVICES=[
+  {icon:"🌐",he:{title:"אתר תדמית",desc:"אתר מהיר ומרשים שמציג את העסק בצורה מקצועית.",items:["עיצוב מודרני ורספונסיבי","דף נחיתה ממיר","SEO בסיסי + מהירות גבוהה"]},
+        en:{title:"Business Website",desc:"A fast, polished site that presents your business professionally.",items:["Modern responsive design","Converting landing page","Basic SEO + high speed"]}},
+  {icon:"🛒",he:{title:"אתר מכירות / חנות",desc:"חנות אונליין עם ניהול מוצרים ותשלומים.",items:["קטלוג מוצרים וסל קניות","חיבור סליקה / תשלומים","ניהול הזמנות נוח"]},
+        en:{title:"Online Store",desc:"An online store with product management and payments.",items:["Catalog & shopping cart","Payment gateway integration","Easy order management"]}},
+  {icon:"🛠️",he:{title:"תחזוקת אתרים",desc:"שמירה על אתר מהיר, מעודכן ומאובטח לאורך זמן.",items:["עדכונים ותיקוני באגים","שיפורי מהירות ואבטחה","שינויי תוכן ותמיכה שוטפת"]},
+        en:{title:"Website Maintenance",desc:"Keeping your site fast, updated and secure over time.",items:["Updates & bug fixes","Speed & security improvements","Content changes & ongoing support"]}}
+];
+
+const PROJECTS=[
+  {emoji:"🏋️",repo:"GymFlow",stack:["React","Node.js","MySQL","JWT"],
+    he:{title:"GymFlow — מערכת ניהול חדר כושר",items:["מערכת full-stack לניהול משתמשים, חוגים, תוכניות ותשלומים","פרונט רספונסיבי ומודולרי ב-React","REST API עם אימות JWT וטיפול מאובטח בנתונים","תכנון ואינטגרציית בסיס נתונים MySQL · ארכיטקטורת 3 שכבות"]},
+    en:{title:"GymFlow — Gym Management System",items:["Full-stack system for users, classes, programs & payments","Responsive, modular React frontend","REST API with JWT auth & secure data handling","MySQL database design · 3-Tier Architecture"]}},
+  {emoji:"🤝",repo:"Volunteer Management System",stack:["C#","WPF",".NET"],
+    he:{title:"מערכת ניהול מתנדבים",items:["אפליקציית דסקטופ לניהול מתנדבים וקריאות שירות","שיבוץ חכם לפי זמינות וכישורים","הפרדת אחריות ברורה · ארכיטקטורת N-Tier","ממשק משתמש מודרני ונוח ב-WPF"]},
+    en:{title:"Volunteer Management System",items:["Desktop app for managing volunteers & service calls","Smart assignment by availability & skills","Clear separation of concerns · N-Tier Architecture","Modern, friendly WPF UI"]}}
+];
+
+const EXP={
+  he:["פיתוח ותחזוקה של מערכת פרודקשן קיימת ב-NestJS ו-TypeScript","בנייה ותחזוקה של רכיבי React בצד הלקוח","ניהול תקשורת מול השרת עם React Query","עבודה מול APIs ויישום שינויים מונחי-עסק","השתתפות בתהליכי פיתוח מקצועיים — Git, Pull Requests, Code Reviews","כתיבת קוד נקי, קריא ותחזוקתי לפי best practices"],
+  en:["Developing & maintaining a production system in NestJS & TypeScript","Building & maintaining React frontend components","Managing server communication with React Query","Working with APIs and implementing business-driven changes","Professional workflows — Git, Pull Requests, Code Reviews","Writing clean, readable, maintainable code following best practices"]
+};
+
+const SKILLS=[
+  {he:"Frontend",en:"Frontend",items:["React","JavaScript","TypeScript","HTML","CSS"]},
+  {he:"Backend",en:"Backend",items:["Node.js","NestJS","C#",".NET"]},
+  {he:"כלים ומושגים",en:"Tools & Concepts",items:["MySQL","Git & GitHub","Postman","REST API","JWT","Design Patterns"]}
+];
+
+const EDU=[
+  {he:{title:"הנדסאית תוכנה — מה\"ט",dates:"2023–2025",items:["יסודות פיתוח תוכנה וכישורים הנדסיים מעשיים"]},
+    en:{title:"Software Engineering Diploma — MAHAT",dates:"2023–2025",items:["Software development fundamentals & practical engineering skills"]}},
+  {he:{title:"לימודים אקדמיים מורחבים — מכון לב",dates:"2023–2025",items:["מבני נתונים ואלגוריתמים","מערכות הפעלה","לוגיקה ואלגברה לינארית","מתמטיקה דיסקרטית","מבוא לבינה מלאכותית"]},
+    en:{title:"Extended Academic Studies — Machon Lev",dates:"2023–2025",items:["Data Structures & Algorithms","Operating Systems","Logic & Linear Algebra","Discrete Mathematics","Intro to Artificial Intelligence"]}}
+];
+
+let lang = localStorage.getItem("lang") || "he";
+
+function render(){
+  const t = T[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang==="he" ? "rtl" : "ltr";
+  document.getElementById("langBtn").textContent = lang==="he" ? "EN" : "עב";
+  // text nodes
+  document.querySelectorAll("[data-t]").forEach(el=>{ if(t[el.dataset.t]!=null) el.textContent = t[el.dataset.t]; });
+  document.querySelectorAll("[data-t-html]").forEach(el=>{ if(t[el.dataset.tHtml]!=null) el.innerHTML = t[el.dataset.tHtml]; });
+  // hero title (html)
+  const h1=document.querySelector('[data-t-html="hero.title"]'); if(h1) h1.innerHTML=t["hero.title"];
+
+  // services
+  document.getElementById("servicesGrid").innerHTML = SERVICES.map(s=>{
+    const d=s[lang];
+    return `<div class="card fade"><div class="ic">${s.icon}</div><h3>${d.title}</h3><p>${d.desc}</p><ul>${d.items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`;
+  }).join("");
+
+  // projects
+  document.getElementById("projectsGrid").innerHTML = PROJECTS.map(p=>{
+    const d=p[lang];
+    return `<div class="card proj fade"><div class="top"><div><div class="ic">${p.emoji}</div><h3>${d.title}</h3></div></div>
+      <ul>${d.items.map(i=>`<li>${i}</li>`).join("")}</ul>
+      <div class="stack">${p.stack.map(s=>`<span class="tag">${s}</span>`).join("")}</div></div>`;
+  }).join("");
+
+  // experience
+  document.getElementById("expList").innerHTML = EXP[lang].map(i=>`<li>${i}</li>`).join("");
+
+  // skills
+  document.getElementById("skillsGrid").innerHTML = SKILLS.map(s=>
+    `<div class="card skillcol fade"><h4>${s[lang]}</h4><div>${s.items.map(i=>`<span class="tag">${i}</span>`).join("")}</div></div>`
+  ).join("");
+
+  // education
+  document.getElementById("eduGrid").innerHTML = EDU.map(e=>{
+    const d=e[lang];
+    return `<div class="card fade"><h3>${d.title}</h3><div class="meta" style="color:var(--accent);font-weight:600;font-size:.9rem;margin:4px 0 12px">${d.dates}</div><ul class="edu">${d.items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`;
+  }).join("");
+
+  observeFades();
+}
+
+function observeFades(){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);} }),{threshold:.12});
+  document.querySelectorAll(".fade:not(.in)").forEach(el=>io.observe(el));
+}
+
+document.getElementById("langBtn").addEventListener("click",()=>{ lang=lang==="he"?"en":"he"; localStorage.setItem("lang",lang); render(); });
+document.getElementById("burger").addEventListener("click",()=>document.getElementById("menu").classList.toggle("open"));
+document.querySelectorAll("#menu a").forEach(a=>a.addEventListener("click",()=>document.getElementById("menu").classList.remove("open")));
+document.getElementById("year").textContent=new Date().getFullYear();
+
+// contact form
+document.getElementById("contactForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const t=T[lang], msg=document.getElementById("formMsg"), f=e.target;
+  if(f.botcheck.value){return;} // honeypot
+  const data={name:f.name.value,email:f.email.value,message:f.message.value};
+  msg.style.display="block"; msg.style.color="var(--muted)"; msg.textContent=t["form.sending"];
+  if(WEB3FORMS_KEY){
+    try{
+      const r=await fetch("https://api.web3forms.com/submit",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
+        body:JSON.stringify({access_key:WEB3FORMS_KEY,subject:"פנייה חדשה מהאתר",...data})});
+      const j=await r.json();
+      if(j.success){msg.style.color="var(--accent)";msg.textContent=t["form.ok"];f.reset();}
+      else throw new Error();
+    }catch(_){ msg.style.color="#ff8a8a"; msg.textContent=t["form.err"]; }
+  }else{
+    // fallback: open mail client
+    const body=encodeURIComponent(`${data.name} (${data.email})\n\n${data.message}`);
+    window.location.href=`mailto:bashy3309@gmail.com?subject=${encodeURIComponent("פנייה מהאתר")}&body=${body}`;
+    msg.style.color="var(--accent)"; msg.textContent=t["form.ok"];
+  }
+});
+
+render();
+</script>
+</body>
+</html>
